@@ -3,6 +3,11 @@ var Jelinkies = function(linkObjective,captureMethod,insertMethod){
   if(captureMethod == undefined && insertMethod == undefined){
     this.linkObjective = linkObjective;
     var self = this;
+    this.signaling = function(){
+      for (var i=0;i<self.onSignaledActions.length;i++) {
+        self.onSignaledActions[i](self.linkObjective);
+      }
+    }
     this.linkedValue = function(val){
       if(val == undefined){
         return self.linkObjective;
@@ -17,6 +22,11 @@ var Jelinkies = function(linkObjective,captureMethod,insertMethod){
     this.captureMethod = captureMethod;
     this.insertMethod = insertMethod;
     var self = this;
+    this.signaling = function(){
+      for (var i=0;i<self.onSignaledActions.length;i++) {
+        self.onSignaledActions[i](self.captureMethod(linkObjective));
+      }
+    }
     this.linkedValue = function(val){
       if(val == undefined){
         return self.captureMethod(linkObjective);
