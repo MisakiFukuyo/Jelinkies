@@ -21,9 +21,21 @@ var Jelinkies = function(linkObjective,captureMethod,insertMethod){
       if(val == undefined){
         return self.captureMethod(linkObjective);
       }else{
-        insertMethod(linkObjective,val);
+        self.insertMethod(linkObjective,val);
         for (var i=0;i<self.onSignaledActions.length;i++) {
           self.onSignaledActions[i](self.captureMethod(linkObjective));
+        }
+      }
+    }
+    this.indexedLinkedValue = function(i,val){
+      if(i == undefined && val == undefined){
+        return;
+      }else if(val == undefined){
+        return self.captureMethod(linkObjective,i);
+      }else{
+        self.insertMethod(linkObjective,val,i);
+        for (var i=0;i<self.onSignaledActions.length;i++) {
+          self.onSignaledActions[i](self.captureMethod(linkObjective,i),i);
         }
       }
     }
